@@ -24,6 +24,7 @@ const AllTasks = () => {
                         <th className="border px-4 py-2">Description</th>
                         <th className="border px-4 py-2">Due Date</th>
                         <th className="border px-4 py-2">Status</th>
+                        <th className="border px-4 py-2">Toggle Status</th>
                         <th className="border px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -43,10 +44,13 @@ const AllTasks = () => {
                             <td className="border px-4 py-2">
                                 <button
                                     onClick={() => handleToggleComplete(task.id)}
-                                    className="mr-2 text-blue-500"
+                                    className="text-blue-500"
                                 >
-                                    {task.completed ? "Mark as Pending" : "Mark as Completed"}
+                                    Toggle Status
                                 </button>
+                            </td>
+                            <td className="border px-4 py-2">
+
                                 <button
                                     onClick={() => handleDelete(task.id)}
                                     className="mr-2 text-red-500"
