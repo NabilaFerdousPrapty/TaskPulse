@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<DashBoard />}>
             <Route index element={<AllTasks />} /> {/* Default route */}
             <Route path="create-task" element={<CreateTask />} />
-            <Route path=":id" element={<TaskDetails />} />
+            <Route path="view-task/:id" element={<TaskDetails />} />
             <Route path=":id/edit" element={<EditTask />} />
           </Route>
         </Routes>
