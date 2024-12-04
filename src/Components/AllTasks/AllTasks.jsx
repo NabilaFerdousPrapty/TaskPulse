@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask, toggleCompleteTask, selectFilteredTasks } from "../../redux/taskSlice";
+import { deleteTask, toggleCompleteTask, selectFilteredTasks, setFilter } from "../../redux/taskSlice";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 import { RiDraggable } from "react-icons/ri";
 import { IoIosArrowDown } from "react-icons/io";
+import TaskFilter from "../TaskFilter/TaskFilter";
 
 const AllTasks = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,9 @@ const AllTasks = () => {
     const [items, setItems] = useState([]);
     const [draggedItem, setDraggedItem] = useState(null);
     const [hoveredItem, setHoveredItem] = useState(null);
-
+    const handleFilterChange = (filter) => {
+        dispatch(setFilter(filter)); // Dispatch the setFilter action to update the filter in the Redux store
+    };
     useEffect(() => {
         // Initialize the local state with tasks from Redux
         setItems(tasksFromRedux);
@@ -89,14 +92,7 @@ const AllTasks = () => {
     return (
         <div className="overflow-x-auto bg-gray-100 p-6">
             <div className="flex justify-center items-center my-4">
-                <div className="inline-flex items-center divide-x   bg-slate-900 rounded-full text-gray-100 divide-gray-300">
-                    <button type="button" className="px-8 py-3">
-                        Filter
-                    </button>
-                    <button type="button" title="Toggle dropdown" className="p-3">
-                        <IoIosArrowDown />
-                    </button>
-                </div>
+                <TaskFilter onFilterChange={handleFilterChange} />
             </div>
             <table className="min-w-full table-auto border-collapse border-2 border-gray-300">
                 <thead className="bg-slate-900 text-white">

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { addTask } from '../../redux/taskSlice';
+import Swal from 'sweetalert2';
 
 
 const CreateTask = () => {
@@ -14,7 +15,15 @@ const CreateTask = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        dispatch(addTask(data)); // Dispatch the addTask action
+
+        dispatch(addTask(data))
+        Swal.fire({
+            title: 'Task added successfully',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+        });
+
         reset(); // Clear the form after submission
     };
 
