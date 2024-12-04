@@ -51,34 +51,7 @@ const Sidebar = () => {
                             </Link>
                         </div>
 
-                        {/* Content Section */}
-                        <div className="space-y-3">
-                            <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Content</label>
 
-                            <Link
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
-                            >
-                                <AiOutlineBook className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Guides</span>
-                            </Link>
-
-                            <Link
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
-                            >
-                                <FiLayers className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Hotspots</span>
-                            </Link>
-
-                            <Link
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
-                            >
-                                <FaRegCheckCircle className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Checklists</span>
-                            </Link>
-                        </div>
 
 
                     </nav>

@@ -13,6 +13,11 @@ const initialState = {
     filter: 'all', // Possible values: 'all', 'completed', 'pending', 'overdue'
 };
 
+// Helper function to save tasks to localStorage
+const saveTasksToLocalStorage = (tasks) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
 // Create slice for tasks
 const taskSlice = createSlice({
     name: 'tasks',
@@ -51,16 +56,23 @@ const taskSlice = createSlice({
         setFilter: (state, action) => {
             state.filter = action.payload;
         },
+        reorderTasks: (state, action) => {
+            state.tasks = action.payload; // Update the tasks with the reordered list
+            saveTasksToLocalStorage(state.tasks); // Save to localStorage
+        },
+
     },
 });
 
-// Helper function to save tasks to localStorage
-const saveTasksToLocalStorage = (tasks) => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-};
-
 // Export actions
-export const { addTask, editTask, deleteTask, toggleCompleteTask, setFilter } = taskSlice.actions;
+export const {
+    addTask,
+    editTask,
+    deleteTask,
+    toggleCompleteTask,
+    setFilter,
+    reorderTasks
+} = taskSlice.actions;
 
 // Selectors for filtering tasks
 export const selectFilteredTasks = (state) => {

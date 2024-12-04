@@ -1,15 +1,17 @@
-
 import { FaUserCircle, FaBell, FaRegMoon, FaRegSun, FaLanguage, FaSearch } from 'react-icons/fa';
 import { HiOutlineViewList, HiOutlineX } from 'react-icons/hi';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CiLight } from 'react-icons/ci';
 import { RiDashboardHorizontalFill } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 
 const TopNavbar = () => {
+    const dispatch = useDispatch();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [currentLanguage, setCurrentLanguage] = useState('EN');
+    const [searchQuery, setSearchQuery] = useState(''); // State for search query
 
     const { register, handleSubmit, reset } = useForm();
 
@@ -22,7 +24,8 @@ const TopNavbar = () => {
 
     const onSearch = (data) => {
         console.log("Search query:", data.search);
-        reset(); // Clears the search field after submission
+        dispatch(setSearchQuery(data.search)); // Dispatch the search query to Redux
+        reset(); // Clear the search field after submission
     };
 
     return (
