@@ -1,18 +1,19 @@
-import { FaUserCircle, FaBell, FaRegMoon, FaRegSun, FaLanguage, FaSearch } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { FaSearch, FaUserCircle, FaBell, FaRegMoon, FaLanguage } from 'react-icons/fa';
 import { HiOutlineViewList, HiOutlineX } from 'react-icons/hi';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { CiLight } from 'react-icons/ci';
 import { RiDashboardHorizontalFill } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
-
+import { useForm } from 'react-hook-form';
+import { setSearchTerm } from '../../redux/taskSlice';
+import { MdOutlineLocationSearching } from "react-icons/md";
 const TopNavbar = () => {
     const dispatch = useDispatch();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [currentLanguage, setCurrentLanguage] = useState('EN');
-    const [searchQuery, setSearchQuery] = useState(''); // State for search query
 
+    // Use React Hook Form for handling form submission
     const { register, handleSubmit, reset } = useForm();
 
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -23,15 +24,14 @@ const TopNavbar = () => {
     };
 
     const onSearch = (data) => {
-        console.log("Search query:", data.search);
-        dispatch(setSearchQuery(data.search)); // Dispatch the search query to Redux
+        // Dispatch the search query to Redux
+        dispatch(setSearchTerm(data.search));  // Replace with the actual Redux action to filter tasks
         reset(); // Clear the search field after submission
     };
 
     return (
         <nav className={`bg-white dark:bg-gray-900 p-2 sm:p-4 shadow-md flex justify-between items-center transition-all duration-300 ${isDarkMode ? 'dark' : ''}`}>
             <div className="flex items-center space-x-2 sm:space-x-4">
-                {/* Mobile menu button */}
                 <button className="lg:hidden" onClick={toggleMobileMenu}>
                     {isMobileMenuOpen ? (
                         <HiOutlineX className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-200" />
@@ -39,8 +39,6 @@ const TopNavbar = () => {
                         <HiOutlineViewList className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-gray-200" />
                     )}
                 </button>
-
-                {/* Logo or Dashboard title */}
                 <span className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white flex items-center">
                     <RiDashboardHorizontalFill className="w-5 h-5 sm:w-6 sm:h-6" />
                     <span className="ml-1 sm:ml-2"></span>
@@ -58,7 +56,7 @@ const TopNavbar = () => {
                         className="ml-2 bg-transparent focus:outline-none text-sm sm:text-base text-gray-700 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400"
                     />
                     <button type="submit" className="ml-2 text-sm sm:text-base text-gray-700 dark:text-gray-200 hover:underline">
-                        Search
+                        <MdOutlineLocationSearching />
                     </button>
                 </form>
 
@@ -122,7 +120,7 @@ const TopNavbar = () => {
                     </button>
                     <button className="flex items-center space-x-1 sm:space-x-2">
                         <FaUserCircle className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700 dark:text-gray-200" />
-                        <span className="text-sm sm:text-base text-gray-700 dark:text-gray-200">User</span>
+                        <span className="text-sm sm:text-base text-gray-700 dark:text-gray-200">Profile</span>
                     </button>
                 </div>
             )}

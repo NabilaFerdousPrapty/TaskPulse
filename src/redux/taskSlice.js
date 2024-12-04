@@ -11,6 +11,7 @@ const loadTasksFromLocalStorage = () => {
 const initialState = {
     tasks: loadTasksFromLocalStorage(),
     filter: 'all', // Possible values: 'all', 'completed', 'pending', 'overdue'
+    searchTerm: '', // To store the search term for filtering tasks by title/description
 };
 
 // Helper function to save tasks to localStorage
@@ -56,11 +57,13 @@ const taskSlice = createSlice({
         setFilter: (state, action) => {
             state.filter = action.payload;
         },
+        setSearchTerm: (state, action) => {
+            state.searchTerm = action.payload; // Update the search term
+        },
         reorderTasks: (state, action) => {
             state.tasks = action.payload; // Update the tasks with the reordered list
             saveTasksToLocalStorage(state.tasks); // Save to localStorage
         },
-
     },
 });
 
@@ -71,24 +74,35 @@ export const {
     deleteTask,
     toggleCompleteTask,
     setFilter,
+    setSearchTerm, // New action to set the search term
     reorderTasks
 } = taskSlice.actions;
 
 // Selectors for filtering tasks
 export const selectFilteredTasks = (state) => {
-    const { tasks, filter } = state.tasks;
+    const { tasks, filter, searchTerm } = state.tasks;
     const today = new Date().toISOString().split('T')[0]; // Get the current date in YYYY-MM-DD format
 
-    switch (filter) {
-        case 'completed':
-            return tasks.filter(task => task.completed);
-        case 'pending':
-            return tasks.filter(task => !task.completed);
-        case 'overdue':
-            return tasks.filter(task => !task.completed && task.dueDate < today);
-        default:
-            return tasks;
-    }
+    // Filter tasks based on the search term and filter
+    return tasks.filter(task => {
+        const matchesFilter = (() => {
+            switch (filter) {
+                case 'completed':
+                    return task.completed;
+                case 'pending':
+                    return !task.completed;
+                case 'overdue':
+                    return !task.completed && task.dueDate < today;
+                default:
+                    return true;
+            }
+        })();
+
+        const matchesSearchTerm = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            task.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+        return matchesFilter && matchesSearchTerm; // Return tasks that match both filter and search term
+    });
 };
 
 // Export reducer

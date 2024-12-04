@@ -172,6 +172,15 @@ const AllTasks = () => {
                             </td>
                         </tr>
                     ))}
+                    {
+                        items.length === 0 && (
+                            <tr>
+                                <td colSpan="10" className="text-center py-4">
+                                    No tasks found. Add a new task to get started.
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>
