@@ -5,10 +5,12 @@ import DashBoardUpperNav from "../../Components/DashboardUpperNav/DashboardUpper
 
 const DashBoard = () => {
     return (
-        <div className="min-h-screen flex bg-gray-100">
-            <Sidebar />
+        <div className="min-h-screen flex bg-gray-100 relative">
+            <div className="absolute">
+                <Sidebar />
+            </div>
             {/* Main Content */}
-            <div className="flex-1 flex-col overflow-y-auto h-screen">
+            <div className="w-full flex-col justify-center items-center mx-auto overflow-y-auto h-screen">
                 <DashBoardUpperNav />
                 <Outlet /> {/* Render child routes here */}
             </div>

@@ -2,9 +2,10 @@ import { AiOutlineDashboard, AiOutlineBarChart, AiOutlineBook } from "react-icon
 import { FiLayers, FiSettings, FiMenu } from "react-icons/fi"; // Added FiMenu for the hamburger icon
 import { FaRegCheckCircle } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Sidebar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true); // To toggle sidebar visibility
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -14,76 +15,72 @@ const Sidebar = () => {
         <div className="flex">
             {/* Sidebar */}
             <aside
-                className={`flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 transition-all duration-300 ${isSidebarOpen ? 'block' : 'hidden'} lg:block`}
+                className={`flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-[#081229] border-r rtl:border-r-0 rtl:border-l border-gray-700 transition-all duration-300 ${isSidebarOpen ? 'block' : 'hidden'} lg:block`}
             >
-                <a href="#">
+                <Link to={'/'}>
                     <img className="w-auto h-20" src="https://i.ibb.co.com/fYv0mH4/task.png" alt="Logo" />
-                </a>
+                </Link>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav className="-mx-3 space-y-6">
                         {/* Analytics Section */}
                         <div className="space-y-3">
-                            <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Analytics</label>
+                            <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
+                                Task Pluse
+                            </label>
 
-                            <a
+                            <Link
+                                to={'/'}
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
+                                href="/"
                             >
                                 <AiOutlineDashboard className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Dashboard</span>
-                            </a>
+                                <span className="mx-2 text-sm font-medium">
+                                    My Work Space
+                                </span>
+                            </Link>
 
-                            <a
+                            <Link to={'create-task'}
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
+                                href="/create-task"
                             >
                                 <AiOutlineBarChart className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Performance</span>
-                            </a>
+                                <span className="mx-2 text-sm font-medium">
+                                    Create Task
+                                </span>
+                            </Link>
                         </div>
 
                         {/* Content Section */}
                         <div className="space-y-3">
                             <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Content</label>
 
-                            <a
+                            <Link
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#"
                             >
                                 <AiOutlineBook className="w-5 h-5" />
                                 <span className="mx-2 text-sm font-medium">Guides</span>
-                            </a>
+                            </Link>
 
-                            <a
+                            <Link
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#"
                             >
                                 <FiLayers className="w-5 h-5" />
                                 <span className="mx-2 text-sm font-medium">Hotspots</span>
-                            </a>
+                            </Link>
 
-                            <a
+                            <Link
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#"
                             >
                                 <FaRegCheckCircle className="w-5 h-5" />
                                 <span className="mx-2 text-sm font-medium">Checklists</span>
-                            </a>
+                            </Link>
                         </div>
 
-                        {/* Customization Section */}
-                        <div className="space-y-3">
-                            <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Customization</label>
 
-                            <a
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#"
-                            >
-                                <FiSettings className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Themes</span>
-                            </a>
-                        </div>
                     </nav>
                 </div>
             </aside>
